@@ -39,7 +39,7 @@
                     @click="save"
                     v-else
             >
-                Save
+                Delay
             </v-btn>
             <v-btn
                     color="deep-purple lighten-2"
