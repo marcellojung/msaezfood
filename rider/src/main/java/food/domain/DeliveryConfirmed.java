@@ -5,6 +5,7 @@ import food.infra.AbstractEvent;
 import java.util.*;
 import lombok.*;
 
+//<<< DDD / Domain Event
 @Data
 @ToString
 public class DeliveryConfirmed extends AbstractEvent {
@@ -19,3 +20,4 @@ public class DeliveryConfirmed extends AbstractEvent {
         super();
     }
 }
+//>>> DDD / Domain Event

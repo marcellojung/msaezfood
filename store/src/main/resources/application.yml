@@ -12,11 +12,31 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+  kafka:
+    producer:
+      retries: 5
+      acks: all
+      properties:
+        enable:
+          idempotence: true   # Set Producer exactly once Trx
+    consumer:
+      properties:
+        spring.json.trusted.packages: "*"
+        isolation.level: read_committed         
   cloud:
     stream:
       kafka:
         binder:
           brokers: localhost:9092
+          transaction:
+            transactionIdPrefix: tx-${random.uuid}   
+        bindings:
+          event-in:
+            consumer:
+              autoCommitOffset: false    # Disable Offset auto commit
+              enableDlq: true
+              dlqName: dlq-food
+              dlqPartitions: 1         
         streams:
           binder:
             configuration:
@@ -28,10 +48,14 @@ spring:
       bindings:
         event-in:
           group: store
+//<<< EDA / Topic Name
           destination: food
+//>>> EDA / Topic Name
           contentType: application/json
         event-out:
+//<<< EDA / Topic Name
           destination: food
+//>>> EDA / Topic Name
           contentType: application/json
 
 logging:
@@ -41,17 +65,37 @@ logging:
 
 
 server:
-  port: 8082
+  port: 8083
 
 ---
 
 spring:
   profiles: docker
+  kafka:
+    producer:
+      retries: 5
+      acks: all
+      properties:
+        enable:
+          idempotence: true   # Set Producer exactly once Trx
+    consumer:
+      properties:
+        spring.json.trusted.packages: "*"
+        isolation.level: read_committed    
   cloud:
     stream:
       kafka:
         binder:
           brokers: my-kafka:9092
+          transaction:
+            transactionIdPrefix: tx-${random.uuid}   
+        bindings:
+          event-in:
+            consumer:
+              autoCommitOffset: false    # Disable Offset auto commit
+              enableDlq: true
+              dlqName: dlq-food
+              dlqPartitions: 1              
         streams:
           binder:
             configuration:

@@ -1,7 +1,6 @@
 package food.domain;
 
 import food.StoreApplication;
-import food.domain.Rejected;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -10,6 +9,7 @@ import lombok.Data;
 @Entity
 @Table(name = "Cooking_table")
 @Data
+//<<< DDD / Aggregate Root
 public class Cooking {
 
     @Id
@@ -24,12 +24,6 @@ public class Cooking {
 
     private String status;
 
-    @PostPersist
-    public void onPostPersist() {
-        Rejected rejected = new Rejected(this);
-        rejected.publishAfterCommit();
-    }
-
     public static CookingRepository repository() {
         CookingRepository cookingRepository = StoreApplication.applicationContext.getBean(
             CookingRepository.class
@@ -37,21 +31,29 @@ public class Cooking {
         return cookingRepository;
     }
 
+    //<<< Clean Arch / Port Method
     public void acceptoreject(AcceptorejectCommand acceptorejectCommand) {
         Accepted accepted = new Accepted(this);
         accepted.publishAfterCommit();
     }
 
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
     public void start() {
         CookStarted cookStarted = new CookStarted(this);
         cookStarted.publishAfterCommit();
     }
 
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
     public void finish() {
         CookFinished cookFinished = new CookFinished(this);
         cookFinished.publishAfterCommit();
     }
 
+    //>>> Clean Arch / Port Method
+
+    //<<< Clean Arch / Port Method
     public static void loadOrderInfo(OrderPlaced orderPlaced) {
         /** Example 1:  new item 
         Cooking cooking = new Cooking();
@@ -71,4 +73,7 @@ public class Cooking {
         */
 
     }
+    //>>> Clean Arch / Port Method
+
 }
+//>>> DDD / Aggregate Root

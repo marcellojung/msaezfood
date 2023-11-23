@@ -1,7 +1,7 @@
 # 
 
 ## Model
-www.msaez.io/#/storming/food-ex-0404
+www.msaez.io/#/storming/food_marcellojeong
 
 ## Before Running Services
 ### Make sure there is a Kafka server running
@@ -14,7 +14,7 @@ docker-compose up
 cd kafka
 docker-compose exec -it kafka /bin/bash
 cd /bin
-./kafka-console-consumer --bootstrap-server localhost:9092 --topic
+./kafka-console-consumer --bootstrap-server localhost:9092 --isolation-level read_committed --topic
 ```
 
 ## Run the backend micro-services
@@ -34,15 +34,12 @@ mvn spring-boot:run
 ## Test by API
 - customer
 ```
- http :8088/orders id="id" customerId="customerId" foodId="foodId" option="option" address="address" status="status" 
 ```
 - store
 ```
- http :8088/cookings id="id" orderId="orderId" foodId="foodId" option="option" status="status" 
 ```
 - rider
 ```
- http :8088/deliveries id="id" orderId="orderId" address="address" status="status" 
 ```
 
 

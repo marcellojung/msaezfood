@@ -1,7 +1,6 @@
 package food.domain;
 
 import food.CustomerApplication;
-import food.domain.OrderPlaced;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -10,6 +9,7 @@ import lombok.Data;
 @Entity
 @Table(name = "Order_table")
 @Data
+//<<< DDD / Aggregate Root
 public class Order {
 
     @Id
@@ -26,12 +26,6 @@ public class Order {
 
     private String status;
 
-    @PostPersist
-    public void onPostPersist() {
-        OrderPlaced orderPlaced = new OrderPlaced(this);
-        orderPlaced.publishAfterCommit();
-    }
-
     public static OrderRepository repository() {
         OrderRepository orderRepository = CustomerApplication.applicationContext.getBean(
             OrderRepository.class
@@ -39,11 +33,15 @@ public class Order {
         return orderRepository;
     }
 
+    //<<< Clean Arch / Port Method
     public void cancel() {
         OrderCancelled orderCancelled = new OrderCancelled(this);
         orderCancelled.publishAfterCommit();
     }
 
+    //>>> Clean Arch / Port Method
+
+    //<<< Clean Arch / Port Method
     public static void updateStatus(CookStarted cookStarted) {
         /** Example 1:  new item 
         Order order = new Order();
@@ -64,6 +62,8 @@ public class Order {
 
     }
 
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
     public static void updateStatus(FoodPicked foodPicked) {
         /** Example 1:  new item 
         Order order = new Order();
@@ -83,4 +83,7 @@ public class Order {
         */
 
     }
+    //>>> Clean Arch / Port Method
+
 }
+//>>> DDD / Aggregate Root

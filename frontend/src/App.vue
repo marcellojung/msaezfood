@@ -37,42 +37,6 @@
                 <v-list>
 
 
-                    <v-list-item
-                        class="px-2"
-                        key="orders"
-                        to="/orders"
-                        @click="changeUrl()"
-                        color="deep-purple lighten-2"
-                        style="font-weight:700;"
-                    >
-                        Order
-                    </v-list-item>
-
-
-
-                    <v-list-item
-                        class="px-2"
-                        key="cookings"
-                        to="/cookings"
-                        @click="changeUrl()"
-                        color="deep-purple lighten-2"
-                        style="font-weight:700;"
-                    >
-                        Cooking
-                    </v-list-item>
-
-
-
-                    <v-list-item
-                        class="px-2"
-                        key="deliveries"
-                        to="/deliveries"
-                        @click="changeUrl()"
-                        color="deep-purple lighten-2"
-                        style="font-weight:700;"
-                    >
-                        Delivery
-                    </v-list-item>
 
 
 
@@ -87,113 +51,8 @@
             </v-container>
             <v-container v-else class="py-8 px-6 mt-10" fluid>
                 <v-row>
-                        <v-card
-                            class="mx-auto"
-                            style="height:300px; width:300px; margin-bottom:20px;"
-                            outlined
-                        >
-                            <v-list-item>
-                                <v-list-item-avatar 
-                                    class="mx-auto"
-                                    size="80"
-                                    style="margin-top:80px;"
-                                ><span class="mdi mdi-apps" style="font-size:60px; color:#9575CD;"></span>
-                                </v-list-item-avatar>
-                            </v-list-item>
 
-                            <v-card-actions>
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on }">
-                                        <v-btn 
-                                            v-on="on"
-                                            class="mx-auto"
-                                            outlined
-                                            rounded
-                                            key="orders"
-                                            to="/orders"
-                                            @click="changeUrl()"
-                                            color="deep-purple lighten-2"
-                                            style="font-weight:500; font-size:20px; padding:15px; border:solid 2px; max-width:250px; overflow:hidden"
-                                        >
-                                            Order
-                                        </v-btn>
-                                    </template>
-                                    <span>Order</span>
-                                </v-tooltip>
-                            </v-card-actions>
-                        </v-card>
 
-                        <v-card
-                            class="mx-auto"
-                            style="height:300px; width:300px; margin-bottom:20px;"
-                            outlined
-                        >
-                            <v-list-item>
-                                <v-list-item-avatar 
-                                    class="mx-auto"
-                                    size="80"
-                                    style="margin-top:80px;"
-                                ><span class="mdi mdi-apps" style="font-size:60px; color:#9575CD;"></span>
-                                </v-list-item-avatar>
-                            </v-list-item>
-
-                            <v-card-actions>
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on }">
-                                        <v-btn 
-                                            v-on="on"
-                                            class="mx-auto"
-                                            outlined
-                                            rounded
-                                            key="cookings"
-                                            to="/cookings"
-                                            @click="changeUrl()"
-                                            color="deep-purple lighten-2"
-                                            style="font-weight:500; font-size:20px; padding:15px; border:solid 2px; max-width:250px; overflow:hidden"
-                                        >
-                                            Cooking
-                                        </v-btn>
-                                    </template>
-                                    <span>Cooking</span>
-                                </v-tooltip>
-                            </v-card-actions>
-                        </v-card>
-
-                        <v-card
-                            class="mx-auto"
-                            style="height:300px; width:300px; margin-bottom:20px;"
-                            outlined
-                        >
-                            <v-list-item>
-                                <v-list-item-avatar 
-                                    class="mx-auto"
-                                    size="80"
-                                    style="margin-top:80px;"
-                                ><span class="mdi mdi-apps" style="font-size:60px; color:#9575CD;"></span>
-                                </v-list-item-avatar>
-                            </v-list-item>
-
-                            <v-card-actions>
-                                <v-tooltip bottom>
-                                    <template v-slot:activator="{ on }">
-                                        <v-btn 
-                                            v-on="on"
-                                            class="mx-auto"
-                                            outlined
-                                            rounded
-                                            key="deliveries"
-                                            to="/deliveries"
-                                            @click="changeUrl()"
-                                            color="deep-purple lighten-2"
-                                            style="font-weight:500; font-size:20px; padding:15px; border:solid 2px; max-width:250px; overflow:hidden"
-                                        >
-                                            Delivery
-                                        </v-btn>
-                                    </template>
-                                    <span>Delivery</span>
-                                </v-tooltip>
-                            </v-card-actions>
-                        </v-card>
 
                 </v-row>
             </v-container>

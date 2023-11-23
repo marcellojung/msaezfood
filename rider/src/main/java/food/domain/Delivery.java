@@ -9,6 +9,7 @@ import lombok.Data;
 @Entity
 @Table(name = "Delivery_table")
 @Data
+//<<< DDD / Aggregate Root
 public class Delivery {
 
     @Id
@@ -21,9 +22,6 @@ public class Delivery {
 
     private String status;
 
-    @PostPersist
-    public void onPostPersist() {}
-
     public static DeliveryRepository repository() {
         DeliveryRepository deliveryRepository = RiderApplication.applicationContext.getBean(
             DeliveryRepository.class
@@ -31,16 +29,22 @@ public class Delivery {
         return deliveryRepository;
     }
 
+    //<<< Clean Arch / Port Method
     public void pickFood() {
         FoodPicked foodPicked = new FoodPicked(this);
         foodPicked.publishAfterCommit();
     }
 
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
     public void confirm() {
         DeliveryConfirmed deliveryConfirmed = new DeliveryConfirmed(this);
         deliveryConfirmed.publishAfterCommit();
     }
 
+    //>>> Clean Arch / Port Method
+
+    //<<< Clean Arch / Port Method
     public static void loadDeliveryInfo(CookStarted cookStarted) {
         /** Example 1:  new item 
         Delivery delivery = new Delivery();
@@ -61,6 +65,8 @@ public class Delivery {
 
     }
 
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
     public static void loadDeliveryInfo(OrderPlaced orderPlaced) {
         /** Example 1:  new item 
         Delivery delivery = new Delivery();
@@ -80,4 +86,7 @@ public class Delivery {
         */
 
     }
+    //>>> Clean Arch / Port Method
+
 }
+//>>> DDD / Aggregate Root
